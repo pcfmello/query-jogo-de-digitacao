@@ -1,0 +1,1 @@
+# query-jogo-de-digitacao
