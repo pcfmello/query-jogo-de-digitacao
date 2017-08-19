@@ -4,6 +4,7 @@ var contadorCaracteres = $('#contador-caracteres');
 var campoDigitacao = $('.campo-digitacao');
 var tempoDigitacao = $('#tempo-digitacao');
 var botaoReiniciar = $('#botao-reiniciar');
+var contadores = $('.contadores');
 var tempoInicial;
 
 /* atalho para $(document).ready */
@@ -33,16 +34,20 @@ function inicializaContadores() {
 }
 
 function inicializaCronometro() {
-  botaoReiniciar.attr('disabled', true);
+  botaoReiniciar.attr('disabled', true).addClass('disabled');
   campoDigitacao.one('focus', function() { // .one => Executa apenas uma vez o evento
     var tempoRestante = tempoDigitacao.text();
     var cronometroId = setInterval(function() {
           tempoRestante--;
           tempoDigitacao.text(tempoRestante);
+          if(tempoRestante <= 3) {
+            tempoDigitacao.parent().addClass('red-text text-darken-4');
+          }
           if(tempoRestante < 1) {
               campoDigitacao.attr('disabled', true);
               fimJogo.show();
-              botaoReiniciar.attr('disabled', false);
+              contadores.addClass('aumenta-fonte');
+              botaoReiniciar.attr('disabled', false).removeClass('disabled');
               clearInterval(cronometroId);
           }
       }, 1000);
@@ -56,5 +61,7 @@ function reiniciaJogo() {
   tempoDigitacao.text(tempoInicial);
   contadorPalavra.text(0);
   contadorCaracteres.text(0);
+  tempoDigitacao.parent().removeClass('red-text text-darken-4');
+  contadores.removeClass('aumenta-fonte');
   inicializaCronometro();
 }
