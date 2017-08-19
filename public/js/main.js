@@ -7,6 +7,7 @@ var botaoReiniciar = $('#botao-reiniciar');
 var contadores = $('.contadores');
 var caixaTextarea = $('.caixa-textarea');
 var frase = $('.frase');
+var placar = $('.placar');
 var tempoInicial;
 
 /* atalho para $(document).ready */
@@ -43,19 +44,28 @@ function inicializaCronometro() {
           tempoRestante--;
           tempoDigitacao.text(tempoRestante);
           if(tempoRestante == 3) {
-            tempoDigitacao.parent().addClass('red-text text-darken-4');
-            campoDigitacao.addClass('red-text text-darken-4');
+            destacaTempo();
           }
           if(tempoRestante < 1) {
-              campoDigitacao.attr('disabled', true);
-              fimJogo.show();
-              contadores.toggleClass('aumenta-fonte');
-              campoDigitacao.removeClass('red-text text-darken-4');
-              botaoReiniciar.attr('disabled', false).toggleClass('disabled');
+              finalizaJogo();
               clearInterval(cronometroId);
           }
       }, 1000);
   });
+}
+
+function finalizaJogo() {
+  campoDigitacao.attr('disabled', true);
+  fimJogo.show();
+  contadores.toggleClass('aumenta-fonte');
+  campoDigitacao.removeClass('red-text text-darken-4');
+  botaoReiniciar.attr('disabled', false).toggleClass('disabled');
+  inserePlacar();
+}
+
+function destacaTempo() {
+  tempoDigitacao.parent().addClass('red-text text-darken-4');
+  campoDigitacao.addClass('red-text text-darken-4');
 }
 
 function inicializaRegraDeComparacao() {
@@ -78,9 +88,8 @@ function inicializaRegraDeComparacao() {
       caixaTextarea.removeClass('frase-correta');
       caixaTextarea.removeClass('frase-errada');
     }
-  });
+  });'<tr><td>' + nome + '</td><td>' + totalPalavras + '</td></tr>'
 }
-
 
 function reiniciaJogo() {
   fimJogo.hide();
@@ -94,4 +103,12 @@ function reiniciaJogo() {
   caixaTextarea.removeClass('frase-errada');
   contadores.toggleClass('aumenta-fonte');
   inicializaCronometro();
+}
+
+function inserePlacar() {
+  console.log(placar);
+  var nome = "Paulo";
+  var totalPalavras = contadorPalavra.text();
+  var linhaTabela = '<tr><td>' + nome + '</td><td>' + totalPalavras + '</td></tr>'
+  placar.find('table tbody').append(linhaTabela);
 }

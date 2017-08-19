@@ -24,13 +24,14 @@
         <i class="small material-icons">description</i>
         <span id="tamanho-frase"></span> palavra(s)
       </li>
-      <li>
+      <li class="tempo">
         <i class="small material-icons">access_time</i>
         <span id="tempo-digitacao">10</span> segundos
-      </li>Comi todo o bolo de chococalte fe
+      </li>
     </ul>
 
-    <div class="fim-do-jogo center card-panel red darken-4 white-text">Game Over</div>
+    <!-- <div class="fim-do-jogo center card-panel red darken-4 white-text">Game Over</div> -->
+    <div class="fim-do-jogo center red darken-4 white-text">Game Over</div>
 
     <div class="caixa-textarea input-field col s12">
       <textarea class="campo-digitacao materialize-textarea"></textarea>
@@ -41,6 +42,24 @@
       <li><span id="contador-caracteres">0</span> caracteres</li>
       <li><span id="contador-palavras">0</span> palavras</li>
     </ul>
+
+    <section class="placar">
+      <h3 class="center">Placar</h3>
+      <table class="centered bordered ">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th># Palavras</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Paulo</td>
+            <td>6</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
     <div class="center">
       <a ID="botao-reiniciar" class="btn-floating btn-large waves-effect waves-light red">
         <i class="material-icons">restore</i>
