@@ -1,0 +1,26 @@
+.frase {
+  font-size: 1.3em;
+  text-align: justify;
+}
+
+.fim-do-jogo {
+  font-size: 2em;
+}
+
+.aumenta-fonte {
+  font-size: 2em;
+}
+
+.caixa-textarea {
+  border: 1px solid grey;
+  border-radius: 2px;
+  padding: 10px;
+}
+
+.frase-correta {
+  border-color: #009688;
+}
+
+.frase-errada {
+  border-color: #b71c1c;
+}
