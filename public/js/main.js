@@ -21,6 +21,12 @@ $(function() {
   botaoReiniciar.click(function() { reiniciaJogo(); });
 });
 
+$('.botao-excluir').click(function(event) {
+  console.log('Clicado!');
+  event.preventDefault();
+  $(this).parent().parent().remove();
+});
+
 function inicializaFrase() {
   var numeroPalavras = frase.text().split(' ').length;
   var tamanhoFrase = $('#tamanho-frase');
@@ -48,7 +54,7 @@ function inicializaCronometro() {
           }
           if(tempoRestante < 1) {
               finalizaJogo();
-              clearInterval(cronometroId);
+              clearInterval(cronometroId);event
           }
       }, 1000);
   });
@@ -88,12 +94,12 @@ function inicializaRegraDeComparacao() {
       caixaTextarea.removeClass('frase-correta');
       caixaTextarea.removeClass('frase-errada');
     }
-  });'<tr><td>' + nome + '</td><td>' + totalPalavras + '</td></tr>'
+  });
 }
 
-function reiniciaJogo() {
+function reiniciaJogo() {event
   fimJogo.hide();
-  campoDigitacao.attr('disabled', false);
+  campoDigitacao.attr('disabled', false);excluir
   campoDigitacao.val('');
   tempoDigitacao.text(tempoInicial);
   contadorPalavra.text(0);
@@ -106,9 +112,20 @@ function reiniciaJogo() {
 }
 
 function inserePlacar() {
-  console.log(placar);
   var nome = "Paulo";
   var totalPalavras = contadorPalavra.text();
-  var linhaTabela = '<tr><td>' + nome + '</td><td>' + totalPalavras + '</td></tr>'
+  var linhaTabela = criaLinhaTabela(nome, totalPalavras);
   placar.find('table tbody').append(linhaTabela);
+}
+
+function criaLinhaTabela(nome, total) {
+  return '<tr>' +
+            '<td>' + nome + '</td>' +
+            '<td>' + total + '</td>' +
+            '<td>' +
+              '<a href="#" class="botao-excluir btn-medium waves-effect waves-light">' +
+                '<i class="small material-icons red-text darken4">delete_forever</i>' +
+              '</a>' +
+            '</td>' +
+         '</tr>';
 }
