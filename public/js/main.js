@@ -1,10 +1,8 @@
 var fimJogo = $('.fim-do-jogo');
 var contadorPalavra = $('#contador-palavras');
-var contadorCaracteres = $('#contador-caracteres');
 var campoDigitacao = $('.campo-digitacao');
 var tempoDigitacao = $('#tempo-digitacao');
 var botaoReiniciar = $('#botao-reiniciar');
-var contadores = $('.contadores');
 var caixaTextarea = $('.caixa-textarea');
 var frase = $('.frase');
 var placar = $('.placar');
@@ -21,12 +19,13 @@ $(function() {
   botaoReiniciar.click(function() { reiniciaJogo(); });
 });
 
+
+
 function inicializaContadores() {
   campoDigitacao.on('input', function() {
     var totalPalavras = $(this).val().split(/\S+/).length - 1; // Retira quaisquer espaços vazios do contador de palavras e substitui pelo length
     var totalCaracteres = $(this).val().length;
-    contadorPalavra.text(totalPalavras);elemento
-    contadorCaracteres.text(totalCaracteres);
+    contadorPalavra.text(totalPalavras);
   });
 }
 
@@ -51,7 +50,6 @@ function inicializaCronometro() {
 function finalizaJogo() {
   campoDigitacao.attr('disabled', true);
   fimJogo.show();
-  contadores.toggleClass('aumenta-fonte');
   campoDigitacao.removeClass('red-text text-darken-4');
   botaoReiniciar.attr('disabled', false).toggleClass('disabled');
   inserePlacar('Paulo Cesar', contadorPalavra.text());
@@ -91,10 +89,8 @@ function reiniciaJogo() {event
   campoDigitacao.val('');
   tempoDigitacao.text(tempoInicial);
   contadorPalavra.text(0);
-  contadorCaracteres.text(0);
   tempoDigitacao.parent().removeClass('red-text text-darken-4');
   caixaTextarea.removeClass('frase-correta');
   caixaTextarea.removeClass('frase-errada');
-  contadores.toggleClass('aumenta-fonte');
   inicializaCronometro();
 }
