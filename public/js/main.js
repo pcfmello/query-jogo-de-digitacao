@@ -17,6 +17,8 @@ $(function() {
   inicializaContadores();
   inicializaCronometro();
   botaoReiniciar.click(function() { reiniciaJogo(); });
+
+  $('#placar-eletronico').modal();
 });
 
 

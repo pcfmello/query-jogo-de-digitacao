@@ -33,7 +33,11 @@ blockquote {
   padding: 10px 0;
 }
 
-.informacoes div {
-  display: flex;
-  align-items: center;
+.informacao {
+  justify-content: center;
+}
+
+.botao-fechar-modal {
+  position: absolute;
+  right: 0;
 }

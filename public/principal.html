@@ -41,12 +41,18 @@
 
       <div class="row informacoes">
         <div class="col s6">
-          <i class="small material-icons">description</i>
-          <span id="contador-palavras">0 </span> palavra(s)
+          <div class="informacao flow-text valign-wrapper">
+            <i class="small material-icons">description</i>
+            <span id="contador-palavras">0 </span>
+            palavra(s)
+          </div>
         </div>
         <div class="tempo col s6">
-          <i class="small material-icons">access_time</i>
-          <span id="tempo-digitacao">3 </span> segundos
+          <div class="informacao flow-text valign-wrapper">
+            <i class="small material-icons">access_time</i>
+            <span id="tempo-digitacao">3 </span>
+            segundos
+          </div>
         </div>
       </div>
 
@@ -55,8 +61,29 @@
           <a id="botao-reiniciar" class="btn-floating btn-small waves-effect waves-light red">
             <i class="material-icons">restore</i>
           </a>
+          <!-- Modal Trigger -->
+          <a class="waves-effect waves-light btn modal-trigger" href="#placar-eletronico">
+            <i class="material-icons">fullscreen</i>
+          </a>
+
         </div>
       </div>
+    </section>
+
+    <section class="modais">
+
+      <!-- Modal Structure -->
+      <div id="placar-eletronico" class="modal">
+        <div class="modal-content">
+          <i class="botao-fechar-modal material-icons modal-close">close</i>
+          <h4>Placar do Jogo</h4>
+          <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+        </div>
+      </div>
+
     </section>
 
     <section class="placar">
@@ -78,6 +105,9 @@
   <footer></footer>
 
   <script src="js/jquery.js"></script>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+
   <script src="js/main.js"></script>
   <script src="js/frase.js"></script>
   <script src="js/placar.js"></script>
