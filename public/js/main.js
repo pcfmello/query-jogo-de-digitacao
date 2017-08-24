@@ -57,7 +57,6 @@ function finalizaJogo() {
 
 function destacaTempo() {
   tempoDigitacao.parent().addClass('red-text text-darken-4');
-  campoDigitacao.addClass('red-text text-darken-4');
 }
 
 function inicializaRegraDeComparacao() {
