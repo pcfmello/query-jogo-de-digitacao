@@ -1,11 +1,11 @@
-var fimJogo = $('.fim-do-jogo');
+var fimJogo = $('.game-over');
 var contadorPalavra = $('#contador-palavras');
-var campoDigitacao = $('.campo-digitacao');
+var campoDigitacao = $('#campo-digitacao');
 var tempoDigitacao = $('#tempo-digitacao');
 var botaoReiniciar = $('#botao-reiniciar');
-var caixaTextarea = $('.caixa-textarea');
 var frase = $('.frase');
-var placar = $('.placar');
+var placar = $('#placar-eletronico');
+var labelDigitacao = $('#label-digitacao');
 var tempoInicial;
 
 /* atalho para $(document).ready */
@@ -17,11 +17,8 @@ $(function() {
   inicializaContadores();
   inicializaCronometro();
   botaoReiniciar.click(function() { reiniciaJogo(); });
-
-  $('#placar-eletronico').modal();
+  placar.modal();
 });
-
-
 
 function inicializaContadores() {
   campoDigitacao.on('input', function() {
@@ -43,7 +40,7 @@ function inicializaCronometro() {
           }
           if(tempoRestante < 1) {
               finalizaJogo();
-              clearInterval(cronometroId);event
+              clearInterval(cronometroId);
           }
       }, 1000);
   });
@@ -52,7 +49,8 @@ function inicializaCronometro() {
 function finalizaJogo() {
   campoDigitacao.attr('disabled', true);
   fimJogo.show();
-  campoDigitacao.removeClass('red-text text-darken-4');
+  //campoDigitacao.removeClass('red-text text-darken-4');
+  sinalizaErroDigitacao(false);
   botaoReiniciar.attr('disabled', false).toggleClass('disabled');
   inserePlacar('Paulo Cesar', contadorPalavra.text());
 }
@@ -71,18 +69,25 @@ function inicializaRegraDeComparacao() {
      var termoParaComparar = fraseCompleta.startsWith(termoDigitado); */
 
     if(termoDigitado !== termoParaComparar) {
-      caixaTextarea.addClass('frase-errada');
-      caixaTextarea.removeClass('frase-certa');
+      sinalizaErroDigitacao(true);
     } else {
-      caixaTextarea.addClass('frase-correta');
-      caixaTextarea.removeClass('frase-errada');
+      sinalizaErroDigitacao(false);
     }
 
     if(termoDigitado.length < 1) {
-      caixaTextarea.removeClass('frase-correta');
-      caixaTextarea.removeClass('frase-errada');
+      sinalizaErroDigitacao(false);
     }
   });
+}
+
+function sinalizaErroDigitacao(digitadoCorretamente) {
+  if(digitadoCorretamente) {
+    labelDigitacao.addClass('frase-errada-label');
+    campoDigitacao.addClass('frase-errada-textarea');
+  } else {
+    labelDigitacao.removeClass('frase-errada-label');
+    campoDigitacao.removeClass('frase-errada-textarea');
+  }
 }
 
 function reiniciaJogo() {event
@@ -92,7 +97,6 @@ function reiniciaJogo() {event
   tempoDigitacao.text(tempoInicial);
   contadorPalavra.text(0);
   tempoDigitacao.parent().removeClass('red-text text-darken-4');
-  caixaTextarea.removeClass('frase-correta');
-  caixaTextarea.removeClass('frase-errada');
+  sinalizaErroDigitacao(false);
   inicializaCronometro();
 }
