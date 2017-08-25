@@ -70,9 +70,10 @@ blockquote {
 
 footer {
   width: 100%;
-  position: absolute;
+  position: fixed;
   bottom: 0
 }
+
 .botao-fechar-modal {
   background-color: #01579b;
   font-size: 5vh;
