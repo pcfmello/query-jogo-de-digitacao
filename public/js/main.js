@@ -1,4 +1,5 @@
-var fimJogo = $('.game-over');
+var mensagemVencedor = $('.mensagem-vencedor');
+var mensagemPerdedor = $('.mensagem-perdedor');
 var contadorPalavra = $('#contador-palavras');
 var campoDigitacao = $('#campo-digitacao');
 var tempoDigitacao = $('#tempo-digitacao');
@@ -6,14 +7,14 @@ var botaoReiniciar = $('#botao-reiniciar');
 var frase = $('.frase');
 var placar = $('#placar-eletronico');
 var labelDigitacao = $('#label-digitacao');
+var cronometro;
 var tempoInicial;
-var alturaDispositivo;
 
 /* atalho para $(document).ready */
 $(function() {
-  alturaDispositivo = $(window).height();
   tempoInicial = tempoDigitacao.text();
-  fimJogo.hide();
+  mensagemVencedor.hide();
+  mensagemPerdedor.hide();
   inicializaFrase();
   inicializaRegraDeComparacao();
   inicializaContadores();
@@ -21,7 +22,18 @@ $(function() {
   botaoReiniciar.click(function() { reiniciaJogo(); });
   placar.modal();
   inicializaRegraBotoesFooter();
+  inicializaRegraFraseCorreta();
 });
+
+function inicializaRegraFraseCorreta() {
+  campoDigitacao.on('input', function() {
+    var textoDigitado = $(this).val();
+    if(textoDigitado === frase.text()) {
+      finalizaJogo(true);
+      clearInterval(cronometro);
+    }
+  });
+}
 
 function inicializaRegraBotoesFooter() {
   campoDigitacao.on('focus', function() {
@@ -44,7 +56,7 @@ function inicializaCronometro() {
   botaoReiniciar.attr('disabled', true).toggleClass('disabled');
   campoDigitacao.one('focus', function() { // .one => Executa apenas uma vez o evento
     var tempoRestante = tempoDigitacao.text();
-    var cronometroId = setInterval(function() {
+    cronometro = setInterval(function() {
           tempoRestante--;
           tempoDigitacao.text(tempoRestante);
           if(tempoRestante == 3) {
@@ -52,16 +64,16 @@ function inicializaCronometro() {
           }
           if(tempoRestante < 1) {
               finalizaJogo();
-              clearInterval(cronometroId);
+              clearInterval(cronometro);
           }
       }, 1000);
   });
 }
 
-function finalizaJogo() {
+function finalizaJogo(jogadorEhVencedor) {
   campoDigitacao.attr('disabled', true);
-  fimJogo.show();
-  //campoDigitacao.removeClass('red-text text-darken-4');
+  var mensagem = jogadorEhVencedor ? mensagemVencedor : mensagemPerdedor;
+  mensagem.show();
   sinalizaErroDigitacao(false);
   botaoReiniciar.attr('disabled', false).toggleClass('disabled');
   inserePlacar('Paulo Cesar', contadorPalavra.text());
@@ -84,7 +96,6 @@ function inicializaRegraDeComparacao() {
     } else {
       sinalizaErroDigitacao(false);
     }
-
     if(termoDigitado.length < 1) {
       sinalizaErroDigitacao(false);
     }
@@ -102,7 +113,8 @@ function sinalizaErroDigitacao(digitadoCorretamente) {
 }
 
 function reiniciaJogo() {event
-  fimJogo.hide();
+  mensagemVencedor.hide();
+  mensagemPerdedor.hide();
   campoDigitacao.attr('disabled', false);
   campoDigitacao.val('');
   tempoDigitacao.text(tempoInicial);

@@ -19,9 +19,18 @@
   }
 }
 
-.game-over {
-    background-color: #b71c1c;
-    height: 56px;
+.mensagem-perdedor,
+.mensagem-vencedor {
+  color: #fff;
+  height: 56px;
+}
+
+.mensagem-vencedor {
+  background-color: #004d40;
+}
+
+.mensagem-perdedor {
+  background-color: #b71c1c;
 }
 
 .jogo-principal {
