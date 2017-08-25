@@ -7,9 +7,11 @@ var frase = $('.frase');
 var placar = $('#placar-eletronico');
 var labelDigitacao = $('#label-digitacao');
 var tempoInicial;
+var alturaDispositivo;
 
 /* atalho para $(document).ready */
 $(function() {
+  alturaDispositivo = $(window).height();
   tempoInicial = tempoDigitacao.text();
   fimJogo.hide();
   inicializaFrase();
@@ -18,7 +20,17 @@ $(function() {
   inicializaCronometro();
   botaoReiniciar.click(function() { reiniciaJogo(); });
   placar.modal();
+  inicializaRegraBotoesFooter();
 });
+
+function inicializaRegraBotoesFooter() {
+  campoDigitacao.on('focus', function() {
+    $('footer').hide();
+  });
+  campoDigitacao.on('blur', function() {
+    $('footer').show();
+  });
+}
 
 function inicializaContadores() {
   campoDigitacao.on('input', function() {
