@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <title>Jogo de Digitação</title>
+    <link rel="stylesheet" href="css/libs/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <div class="mostrar-no-desktop center">
+    Esse jogo não está disponível para desktops e tablets/ipads.
+  </div>
+
+  <div class="mostrar-no-mobile">
+    <header>
+      <nav>
+        <div class="nav-wrapper light-blue darken-4">
+          <div class="container">
+            <a href="#" class="brand-logo">Typing Game</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="conteudo-principal">
+
+      <div class="mensagem-vencedor valign-wrapper">
+        <h5 class="valign center-block">Você ganhou! :)</h5>
+      </div>
+
+      <div class="mensagem-perdedor valign-wrapper">
+        <h5 class="valign center-block">Você perdeu! :(</h5>
+      </div>
+
+      <section id="jogo-principal" class="container margem-top-inicial">
+
+        <div class="row">
+          <div class="col s12">
+            <blockquote>
+              "<span class="frase">Comi todo o bolo de chocolate.</span>"
+            </blockquote>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12">
+            <div class="input-field">
+              <textarea id="campo-digitacao" class="materialize-textarea"></textarea>
+              <label id="label-digitacao" for="campo-digitacao">Digite aqui o texto acima</label>
+            </div>
+            <span id="mensagens-de-erro">Não é possível colar o texto</span>
+          </div>
+        </div>
+
+        <div class="row informacoes">
+          <div class="col s6">
+            <div class="informacao flow-text valign-wrapper">
+              <i class="small material-icons">description</i>
+              <span id="contador-palavras">0 </span>
+              palavra(s)
+            </div>
+          </div>
+          <div class="tempo col s6">
+            <div class="informacao flow-text valign-wrapper">
+              <i class="small material-icons">access_time</i>
+              <span id="tempo-digitacao">10 </span>
+              segundos
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="modais">
+        <!-- Modal Structure -->
+        <div id="placar-eletronico" class="modal">
+          <div class="modal-content">
+            <i class="botao-fechar-modal material-icons modal-close">close</i>
+            <h4 class="center">Placar</h4>
+            <table class="centered bordered ">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th># Palavras</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Fechar</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <a id="botao-reiniciar" class="waves-effect waves-light red darken-4 btn-large left">
+        <i class="large material-icons">restore</i>
+      </a>
+      <a id="botao-placar" class="waves-effect waves-light light-blue darken-4 btn-large modal-trigger right" href="#placar-eletronico">
+        <i class="large material-icons">list</i>
+      </a>
+    </footer>
+  </div>
+
+  <script src="js/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/frase.js"></script>
+  <script src="js/placar.js"></script>
+</body>
+</html>

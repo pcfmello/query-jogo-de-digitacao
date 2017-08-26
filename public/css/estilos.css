@@ -33,7 +33,7 @@
   background-color: #b71c1c;
 }
 
-.jogo-principal {
+.margem-top-inicial {
   margin-top: 10%;
 }
 
@@ -49,6 +49,10 @@
 .frase-errada-textarea {
   border-bottom: 1px solid #b71c1c!important;
   box-shadow: 0 1px 0 0 #b71c1c!important;
+}
+
+#mensagens-de-erro {
+  color: #b71c1c;
 }
 
 blockquote {
