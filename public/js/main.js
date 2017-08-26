@@ -1,3 +1,4 @@
+var jogoPrincipal = $('#jogo-principal');
 var mensagemVencedor = $('.mensagem-vencedor');
 var mensagemPerdedor = $('.mensagem-perdedor');
 var contadorPalavra = $('#contador-palavras');
@@ -7,6 +8,7 @@ var botaoReiniciar = $('#botao-reiniciar');
 var frase = $('.frase');
 var placar = $('#placar-eletronico');
 var labelDigitacao = $('#label-digitacao');
+var mensagensErro = $('#mensagens-de-erro');
 var cronometro;
 var tempoInicial;
 
@@ -15,6 +17,8 @@ $(function() {
   tempoInicial = tempoDigitacao.text();
   mensagemVencedor.hide();
   mensagemPerdedor.hide();
+  mensagensErro.hide();
+  bloqueiaFuncaoColarTexto();
   inicializaFrase();
   inicializaRegraDeComparacao();
   inicializaContadores();
@@ -24,6 +28,16 @@ $(function() {
   inicializaRegraBotoesFooter();
   inicializaRegraFraseCorreta();
 });
+
+function bloqueiaFuncaoColarTexto() {
+  campoDigitacao.bind('paste', function(e) {
+    e.preventDefault();
+    mensagensErro.show();
+    setTimeout(function(){
+      mensagensErro.hide();
+    }, 3000);
+  });
+}
 
 function inicializaRegraFraseCorreta() {
   campoDigitacao.on('input', function() {
@@ -71,9 +85,11 @@ function inicializaCronometro() {
 }
 
 function finalizaJogo(jogadorEhVencedor) {
+  mensagensErro.hide();
   campoDigitacao.attr('disabled', true);
   var mensagem = jogadorEhVencedor ? mensagemVencedor : mensagemPerdedor;
   mensagem.show();
+  jogoPrincipal.removeClass('margem-top-inicial');
   sinalizaErroDigitacao(false);
   botaoReiniciar.attr('disabled', false).toggleClass('disabled');
   inserePlacar('Paulo Cesar', contadorPalavra.text());
@@ -115,6 +131,7 @@ function sinalizaErroDigitacao(digitadoCorretamente) {
 function reiniciaJogo() {event
   mensagemVencedor.hide();
   mensagemPerdedor.hide();
+  jogoPrincipal.addClass('margem-top-inicial');
   campoDigitacao.attr('disabled', false);
   campoDigitacao.val('');
   tempoDigitacao.text(tempoInicial);
