@@ -23,9 +23,12 @@ function verificaEstadoDoLogin() {
 }
 
 function obtemInformacoesDoUsuario() {
-  FB.api('/me?fields=id,name,picture', function(response) {
+  FB.api('/me?fields=id,name,picture,cover', function(response) {
     usuario = response;
     console.log(usuario);
+    nomeUsuario.text(usuario.name);
+    imgFotoPerfil.attr('src', usuario.picture.data.url);
+    imgCapaUsuario.attr('src', usuario.cover.source);
   });
 }
 
@@ -37,10 +40,8 @@ function statusChangeCallback(response) {
   } else {
     console.log('Não conectado');
   }
-  console.log(response);
+  console.log('Logado');
 }
-
-
 
 
 var jogoPrincipal = $('#jogo-principal');
@@ -54,6 +55,10 @@ var frase = $('.frase');
 var placar = $('#placar-eletronico');
 var labelDigitacao = $('#label-digitacao');
 var mensagensErro = $('#mensagens-de-erro');
+var botaoCollapse = $(".button-collapse");
+var nomeUsuario = $('.nome-usuario');
+var imgFotoPerfil = $('.foto-perfil');
+var imgCapaUsuario = $('.capa-usuario');
 var FB_CONNECTED = 'connected';
 var FB_NOT_AUTHORIZED = 'not_authorized';
 var cronometro;
@@ -62,6 +67,9 @@ var usuario = {};
 
 /* atalho para $(document).ready */
 $(function() {
+  // Initialize collapse button
+  botaoCollapse.sideNav();
+
   tempoInicial = tempoDigitacao.text();
   mensagemVencedor.hide();
   mensagemPerdedor.hide();

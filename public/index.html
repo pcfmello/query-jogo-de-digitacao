@@ -18,10 +18,29 @@
       <nav>
         <div class="nav-wrapper light-blue darken-4">
           <div class="container">
-            <a href="#" class="brand-logo">Typing Game</a>
+            <a href="#" class="brand-logo left">Typing Game</a>
+            <a href="#" class="button-collapse brand-logo right" data-activates="perfil-usuario">
+              <img class="foto-perfil circle responsive-img">
+            </a>
           </div>
         </div>
       </nav>
+
+      <ul id="perfil-usuario" class="side-nav">
+        <li><div class="user-view center-align">
+          <div class="background">
+            <img class="capa-usuario responsive-img">
+          </div>
+          <a href="#!user"><img class="foto-perfil circle responsive-img"></a>
+          <a href="#!name"><span class="nome-usuario"></span></a>
+          <!-- CONFIGURAÇÃO BOTÃO LOGIN COM FACEBOOK -->
+          <div class="fb-login-button center" data-max-rows="1" data-size="large"
+                data-button-type="login_with" data-show-faces="false"
+                data-auto-logout-link="true" data-use-continue-as="false"
+                onlogin="verificaEstadoDoLogin();"></div>
+          <!-- CONFIGURAÇÃO BOTÃO LOGIN COM FACEBOOK -->
+        </div></li>
+      </ul>
     </header>
 
     <main class="conteudo-principal">
