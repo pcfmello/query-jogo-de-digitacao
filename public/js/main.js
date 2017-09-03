@@ -1,3 +1,48 @@
+window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '529365420739136',
+    cookie     : true,
+    xfbml      : true,
+    version    : 'v2.8'
+  });
+  verificaEstadoDoLogin();
+};
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/pt_BR/sdk.js";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+function verificaEstadoDoLogin() {
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+}
+
+function obtemInformacoesDoUsuario() {
+  FB.api('/me?fields=id,name,picture', function(response) {
+    usuario = response;
+    console.log(usuario);
+  });
+}
+
+function statusChangeCallback(response) {
+  if(response.status === 'connected') {
+    obtemInformacoesDoUsuario();
+  } else if(response.status === 'not_authorized') {
+    console.log('Não autorizado')
+  } else {
+    console.log('Não conectado');
+  }
+  console.log(response);
+}
+
+
+
+
 var jogoPrincipal = $('#jogo-principal');
 var mensagemVencedor = $('.mensagem-vencedor');
 var mensagemPerdedor = $('.mensagem-perdedor');
@@ -13,6 +58,7 @@ var FB_CONNECTED = 'connected';
 var FB_NOT_AUTHORIZED = 'not_authorized';
 var cronometro;
 var tempoInicial;
+var usuario = {};
 
 /* atalho para $(document).ready */
 $(function() {
